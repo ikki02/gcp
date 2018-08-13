@@ -1,0 +1,46 @@
+2018-08-07 22:20:55,053 __main__ 28 INFO read_csv start
+2018-08-07 22:20:58,403 __main__ 32 INFO read_csv end
+2018-08-07 22:20:58,403 __main__ 34 INFO data processing start
+2018-08-07 22:21:05,372 __main__ 40 INFO data processing end
+2018-08-07 22:21:05,373 __main__ 42 INFO RandomForestRegressor start
+2018-08-07 22:47:09,311 __main__ 28 INFO read_csv start
+2018-08-07 22:47:11,209 __main__ 32 INFO read_csv end
+2018-08-07 22:47:11,210 __main__ 34 INFO data processing start
+2018-08-07 22:47:17,851 __main__ 40 INFO data processing end
+2018-08-07 22:47:17,851 __main__ 42 INFO RandomForestRegressor start
+2018-08-11 15:01:51,690 __main__ 28 INFO read_csv start
+2018-08-11 15:01:55,060 __main__ 32 INFO read_csv end
+2018-08-11 15:01:55,060 __main__ 34 INFO data processing start
+2018-08-11 15:02:02,259 __main__ 40 INFO data processing end
+2018-08-11 15:02:02,259 __main__ 42 INFO RandomForestRegressor start
+2018-08-11 16:39:52,323 __main__ 28 INFO read_csv start
+2018-08-11 16:39:54,471 __main__ 32 INFO read_csv end
+2018-08-11 16:39:54,471 __main__ 34 INFO data processing start
+2018-08-11 16:54:34,920 __main__ 28 INFO read_csv start
+2018-08-11 16:54:36,885 __main__ 32 INFO read_csv end
+2018-08-11 16:54:36,885 __main__ 34 INFO data processing start
+2018-08-11 16:54:44,900 __main__ 42 INFO data processing end
+2018-08-11 16:54:44,900 __main__ 44 INFO RandomForestRegressor start
+2018-08-11 17:15:21,711 __main__ 49 INFO RandomForestRegressor end
+2018-08-12 11:20:26,036 __main__ 28 DEBUG read_csv start
+2018-08-12 11:22:37,844 __main__ 28 DEBUG read_csv start
+2018-08-12 11:22:41,142 __main__ 32 DEBUG read_csv end
+2018-08-12 11:22:41,142 __main__ 34 DEBUG data processing start
+2018-08-12 11:22:49,307 __main__ 42 DEBUG data processing end
+2018-08-12 11:22:49,308 __main__ 44 DEBUG RandomForestRegressor start
+2018-08-12 11:31:37,348 __main__ 47 DEBUG Fitting is finished
+2018-08-12 11:31:37,348 __main__ 48 DEBUG Scoring start
+2018-08-12 11:32:27,141 __main__ 50 INFO Accuracy on test set: 0.135
+2018-08-12 11:32:27,141 __main__ 51 DEBUG RandomForestRegressor end
+2018-08-12 11:32:27,141 __main__ 52 DEBUG ====================
+2018-08-12 11:43:44,384 __main__ 28 INFO read_csv start
+2018-08-12 11:43:46,401 __main__ 32 DEBUG read_csv end
+2018-08-12 11:43:46,401 __main__ 34 INFO data processing start
+2018-08-12 11:43:54,309 __main__ 42 DEBUG data processing end
+2018-08-12 11:43:54,309 __main__ 44 INFO RandomForestRegressor start
+2018-08-12 11:43:54,309 __main__ 45 INFO Fitting start
+2018-08-12 11:52:50,296 __main__ 48 DEBUG Fitting end
+2018-08-12 11:52:50,296 __main__ 49 INFO Scoring start
+2018-08-12 11:53:42,056 __main__ 51 INFO Accuracy on test set: 0.135
+2018-08-12 11:53:42,056 __main__ 52 DEBUG RandomForestRegressor end
+2018-08-12 11:53:42,056 __main__ 53 DEBUG ====================

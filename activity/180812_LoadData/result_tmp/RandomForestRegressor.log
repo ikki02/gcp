@@ -1,0 +1,14 @@
+2018-08-12 19:42:17,312 __main__ 29 INFO read_csv start
+2018-08-12 19:42:19,330 __main__ 33 DEBUG read_csv end
+2018-08-12 19:51:45,532 __main__ 29 INFO read_csv start
+2018-08-12 19:51:47,320 __main__ 31 DEBUG read_csv end
+2018-08-12 19:51:47,374 __main__ 36 INFO read_csv start
+2018-08-12 19:51:47,430 __main__ 38 DEBUG read_csv end
+2018-08-12 19:51:47,434 __main__ 43 INFO read_csv start
+2018-08-12 19:51:47,471 __main__ 45 DEBUG read_csv end
+2018-08-12 19:57:24,114 __main__ 29 INFO read_train start
+2018-08-12 19:57:25,993 __main__ 31 DEBUG read_train end
+2018-08-12 19:57:26,013 __main__ 36 INFO read_test start
+2018-08-12 19:57:26,073 __main__ 38 DEBUG read_test end
+2018-08-12 19:57:26,078 __main__ 43 INFO read_submission start
+2018-08-12 19:57:26,117 __main__ 45 DEBUG read_submission end
