@@ -28,6 +28,7 @@ logger.propagate = False
 def load_train_data():
     logger.info('read_train start')
     train = pd.read_csv('../../input/sales_train.csv')
+    logger.debug('\n{}'.format(train.head()))
     logger.debug('read_train end')
     return train
 
@@ -35,6 +36,7 @@ def load_train_data():
 def load_test_data():
     logger.info('read_test start')
     test = pd.read_csv('../../input/test.csv')
+    logger.debug('\n{}'.format(test.head()))
     logger.debug('read_test end')
     return test
 
@@ -42,6 +44,7 @@ def load_test_data():
 def load_submission():
     logger.info('read_submission start')
     submit = pd.read_csv('../../input/sample_submission.csv')
+    logger.debug('\n{}'.format(submit.head()))
     logger.debug('read_submission end')
     return submit
 
