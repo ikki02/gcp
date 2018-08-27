@@ -1,9 +1,0 @@
-### 目的変数の違い：
-- train.columnsにおける目的変数item_cnt_day
-- submission.columnsにおける目的変数item_cnt_month
-目的変数の単位を合わせる必要がある。
-
-### 説明変数の違い：
-- test.columnsにおける説明変数:shop_id, item_id
-- train.columnsにおける説明変数:date, date_block_num, shop_id, item_id, item_price, item_cnt_day
-余分なdate, date_block_num, item_priceについて、testに足すか減らすかしないといけない。
