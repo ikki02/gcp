@@ -131,7 +131,7 @@ def forest_gscv():
 	logger.debug('====================')
 
 
-def xgboost():
+def xgboost_gscv():
 	#インストール
 	# cd <workspace>
 	# git clone --recursive https://github.com/dmlc/xgboost
@@ -139,7 +139,7 @@ def xgboost():
 	# pip show setuptoolsでsetuptoolsのチェック。パスが通っていることも重要。
 	# cd python-package; sudo python setup.py install
 
-	logger.info('XGboostRegressor start')
+	logger.info('xgboostRegressor start')
 
 	logger.debug('make_train_data start')
 	train = pd.read_csv('./result_tmp/scaled_train.csv')
@@ -172,7 +172,39 @@ def xgboost():
 	#plt.title('feature importance from xgboost')
 	#plt.show()
 	
-	logger.debug('XGboostRegressor end')
+	logger.debug('xgboostRegressor end')
+	logger.debug('====================')
+
+
+def xgboost_submit():
+	logger.info('xgboostRegressor start')
+	logger.debug('make_train_data start')
+	#train = pd.read_csv('./result_tmp/scaled_train.csv')
+	train = pd.read_csv('./result_tmp/scaled_train_DateBlockNum.csv')
+	#train = train[train['date_block_num']==33]  #直近1ヶ月
+	train = train.loc[(30<train['date_block_num'])&(train['date_block_num']<=33)]  #直近3m
+	
+	y = train['item_cnt_month']
+	X = train.drop(['item_cnt_month', 'date_block_num'], axis=1).values
+	#X = train.drop(['item_cnt_month'], axis=1).values
+	#X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)
+	logger.debug('make_train_data end')
+
+	logger.info('Fitting start')
+	xgbr = xgb.XGBRegressor(max_depth=6, n_estimators=1000)
+	xgbr.fit(X, y)
+	logger.debug('Fitting end')
+
+	logger.info('Scoring start')
+	#logger.info('Accuracy on test set: {:.3f}'.format(.score(X_test, y_test)))
+	test_data = load_test_data()
+	test = test_data.drop(['ID'], axis=1).values
+	
+	submission = load_submission()
+	submission['item_cnt_month'] = xgbr.predict(test).astype(np.float16).clip(0., 20.)
+	submission.to_csv('./result_tmp/submit_180902_31-33_xgb.csv', encoding='utf-8-sig', index=False)
+	logger.info('submission:\n{}'.format(submission.head()))
+	logger.debug('xgboostRegressor end')
 	logger.debug('====================')
 
 
@@ -180,4 +212,4 @@ if __name__ == '__main__':
 	#forest_submit()
 	#forest_cv()
 	#forest_gscv()
-	xgboost()
+	xgboost_submit()
