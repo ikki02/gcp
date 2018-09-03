@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split, cross_val_score, KFold, TimeSeriesSplit, GroupKFold, GridSearchCV
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LinearRegression, Ridge
 import xgboost as xgb
 #import matplotlib.pyplot as plt
 
@@ -208,8 +209,76 @@ def xgboost_submit():
 	logger.debug('====================')
 
 
+def ridge_gscv():
+	logger.info('RidgeRegression start')
+
+	logger.debug('make_train_data start')
+	train = pd.read_csv('./result_tmp/scaled_train.csv')
+	y = train['item_cnt_month']
+	X = train.drop(['item_cnt_month'], axis=1).values
+	logger.debug('make_train_data end')
+
+	logger.info('GridSearchCV start')
+	ridge = Ridge()
+	param_grid = {'alpha': [0.1, 1, 10, 50, 100]}
+	logger.debug('Parameter grid:\n{}'.format(param_grid))
+	grid_search = GridSearchCV(ridge, param_grid, cv=5, n_jobs=-1)
+	X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)
+	grid_search.fit(X_train, y_train)
+	logger.info('Best GridSearchCV parameters_ridge: {}'.format(grid_search.best_params_))
+	logger.info('Best GridSearchCV score_ridge: {}'.format(grid_search.best_score_))
+	logger.info('Test set score_ridge: {:.2f}'.format(grid_search.score(X_test, y_test)))
+	results = pd.DataFrame(grid_search.cv_results_)
+	results.to_csv('./result_tmp/GridSearch_ridge.csv', encoding='utf-8-sig', index=False)
+	logger.debug('GridSearchCV end')
+	
+	#EDAしたいときコメントアウトはずす。
+	ridge = Ridge(**grid_search.best_params_)
+	ridge.fit(X_train, y_train)
+	
+	logger.info('coefficient:{}'.format(ridge.coef_))
+	logger.info('intercept:{}'.format(ridge.intercept_))
+
+	logger.debug('RidgeRegression end')
+	logger.debug('====================')
+
+
+def ridge_submit():
+	logger.info('RidgeRegression start')
+	logger.debug('make_train_data start')
+	#train = pd.read_csv('./result_tmp/scaled_train.csv')
+	train = pd.read_csv('./result_tmp/scaled_train_DateBlockNum.csv')
+	#train = train[train['date_block_num']==33]  #直近1ヶ月
+	train = train.loc[(30<train['date_block_num'])&(train['date_block_num']<=33)]  #直近3m
+	
+	y = train['item_cnt_month']
+	X = train.drop(['item_cnt_month', 'date_block_num'], axis=1).values
+	#X = train.drop(['item_cnt_month'], axis=1).values
+	#X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)
+	logger.debug('make_train_data end')
+
+	logger.info('Fitting start')
+	ridge = Ridge()
+	ridge.fit(X, y)
+	logger.debug('Fitting end')
+
+	logger.info('Scoring start')
+	#logger.info('Accuracy on test set: {:.3f}'.format(.score(X_test, y_test)))
+	test_data = load_test_data()
+	test = test_data.drop(['ID'], axis=1).values
+	
+	submission = load_submission()
+	submission['item_cnt_month'] = ridge.predict(test).astype(np.float16).clip(0., 20.)
+	submission.to_csv('./result_tmp/submit_180902_31-33_ridge.csv', encoding='utf-8-sig', index=False)
+	logger.info('submission:\n{}'.format(submission.head()))
+	logger.debug('RidgeRegression end')
+	logger.debug('====================')
+
+
 if __name__ == '__main__':
 	#forest_submit()
 	#forest_cv()
 	#forest_gscv()
-	xgboost_submit()
+	#xgboost_submit()
+	ridge_gscv()
+	ridge_submit()
